@@ -79,6 +79,22 @@ dbController.getMatchingLikes = (req, res, next) => {
     });
 };
 
+dbController.getUserData = (req,res,next) =>{
+const text =
+  'SELECT * from users  where user_id != $1;';
+const values = [req.params.user_Id];
+db.query(text, values)
+  .then((result) => {
+    console.log('Got Owner Data fromDB: ', result.rows);
+    res.locals.ownerData = result.rows;
+    return next();
+  })
+  .catch((err) => {
+    console.log('Fail---->', err);
+    return next(err);
+  });
+};
+
 module.exports = dbController;
 
 // {

@@ -42,4 +42,12 @@ router.get(
   }
 );
 
+router.get(
+'/ownerInfo/:user_Id',
+dbController.getUserData,
+(req,res) => {
+  return res.status(200).json(res.locals.ownerData)
+}
+);
+
 module.exports = router;
